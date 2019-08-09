@@ -1,28 +1,28 @@
-// var myGame = {
-//     "wordArray": ["cat", "dog"],
-//     "isStarted": false,
-//     "selectedWord": "cat",
-//     "selectedWordToLetters": [],
-//     "guessedLetter": "",
-//     "correctLetters": [],
-//     "incorrectLetters": [],
-//     "numGuesses": 10,
-//     playGame: function() {
+//DON'T FORGET TO ADD COMMENTS
 
-//     },
-//     selectedWordToLetters: function(word) {
-//         var letters = word.split("");
-//         console.log(letters);
+var word = "";
+var wordBank = ["cat", "dog", "horse", "hey", "hi", "hello"];
+word = wordBank[Math.floor(Math.random() * wordBank.length)];
+var wordLength = word.length;
+var wordArray = word.split("");
+var spaces = [];
+var guessedLetters = [];
+var numGuesses = 5;
+var lose = false;
+$("#guesses").html(numGuesses);
+
+//add this to a function
+// function winOrLose() {
+//     if (numGuesses = 0) {
+//         alert("You lose.")
+//     }
+//     if (numGuesses > 0 && ) {
+
 //     }
 // }
-// document.write("Press any key to get started.")
-// $(document).ready(function () {
-    var word = "madeleine";
-    var wordLength = word.length;
-    var wordArray = word.split("");
-    var spaces = [];
 
 function createWord() {
+    
     for (i = 0; i < wordLength; i++) {
         spaces.push("_");
     }
@@ -34,37 +34,102 @@ function printWord() {
     }
 }
 
+function setUp() {
+
 createWord();
 printWord();
+}
 
-document.onkeyup = function(event) {
+console.log(word);
 
-    // Captures the key press, converts it to lowercase, and saves it to a variable.
+setUp();
+
+//Needed functions
+
+// function playGame () {
+
+// }
+
+// function setUp() {
+    
+// }
+// function checkRepeat() {
+
+// }
+
+// function checkIfLetter() {
+
+// }
+
+// function addCorrectLetter() {
+
+// }
+
+// function addIncorrectLetter() {
+
+// }
+
+// function winOrLose() {
+
+// }
+$("#play-button").on("click", function () {
+    
+    lose = false;
+    spaces = [];
+    guessedLetters = [];
+    numGuesses = 5;
+    
+    word = wordBank[Math.floor(Math.random() * wordBank.length)];
+    console.log(word);
+    wordLength = word.length;
+    wordArray = word.split("");
+    $("#correct").html("");
+$("#incorrect").html("");
+$("#guesses").html(numGuesses);
+setUp();
+
+});
+document.onkeyup = function (event) {
+
     var letter = event.key.toLowerCase();
     var isWrong = true;
-    // If the letter is h, run the following functions/methods.
-    for(i=0;i<wordLength; i++) {
-        if (letter === wordArray[i]) {
-            spaces[i] = letter;
-            isWrong = false;
-            $("#correct").html("");
-            printWord();
+    var repeatLetter = false;
+    
+
+    if(!lose) {
+    if (letter.length === 1 && letter.match(/[a-z]/i)) { 
+        for (i = 0; i < guessedLetters.length; i++) {
+            if (letter === guessedLetters[i]) {
+                repeatLetter = true;
+            }
         }
+        if (repeatLetter) {
+            alert("You already guessed that letter! Guess a different letter.")
+        } else {
+            guessedLetters.push("" + letter);
+            for (i = 0; i < wordLength; i++) {
+                if (letter === wordArray[i]) {
+                    isWrong = false;
+                    spaces[i] = letter;
+                    $("#correct").html("");
+                    printWord();
+                }
+            }
+            if (isWrong) {
+                $("#incorrect").append(letter + " ");
+                numGuesses--;
+                $("#guesses").html(numGuesses);
+                if (numGuesses <= 0) {
+                    // $("#guesses").html(numGuesses);
+                    // $("#correct").html("");
+                    // $("#incorrect").html("");
+                    alert("You lose.")
+                    lose = true;
+                }
+            }
+        }
+    } else {
+        alert("Please enter a valid letter.")
     }
-    if (isWrong) {
-        $("#incorrect").append(letter + " ");
-    }
-  };
-
-// console.log(spaces);
-
-// });
-// if (myGame.isStarted) {
-//     myGame.playGame();
-// }
-
-// document.onkeyup = function(event) {
-//     var letter = event.key.toLowerCase();
-//     myGame.guessedLetter = letter;
-
-// }
+}
+};

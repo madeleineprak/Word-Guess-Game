@@ -11,6 +11,7 @@ var guessedLetters = [];
 var numGuesses = 5;
 var lose = false;
 var win = false;
+var gameStarted = false;
 $("#guesses").html(numGuesses);
 
 //add this to a function
@@ -80,7 +81,7 @@ console.log(word);
 //}
 
 $("#play-button").on("click", function () {
-
+    gameStarted = true;
     lose = false;
     win = false;
     spaces = [];
@@ -95,6 +96,9 @@ $("#play-button").on("click", function () {
     $("#incorrect").html("");
     $("#guesses").html(numGuesses);
     setUp();
+    // for(i=0; i) {
+
+    // }
     if (word === wordBank[0]) {
         $("#photo-one").attr("src", photoBank[0]);
         $("#photo-two").attr("src", photoBank[1]);
@@ -121,7 +125,7 @@ document.onkeyup = function (event) {
     var repeatLetter = false;
 
 
-    if (!lose && !win) { //not win too?
+    if (!lose && !win && gameStarted) { //not win too?
         if (letter.length === 1 && letter.match(/[a-z]/i)) {
             for (i = 0; i < guessedLetters.length; i++) {
                 if (letter === guessedLetters[i]) {

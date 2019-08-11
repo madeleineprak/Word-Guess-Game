@@ -1,57 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>title</title>
+    <title>Word Guessing Game</title>
     <!-- <link rel="stylesheet" href="reset.css"> -->
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/b73f20f84b.js"></script>
 </head>
-
 <body>
-
     <div class="page-content text-center">
-
-        <div class="card mb-3" style="width:80%; margin: 0 auto;">
-            <h1 class="card-title">Word Guess Game</h1>
-            <p class="card-text">Insert instructions here.</p>
+        <h1 class="card-title">Guess the Word</h1>
+        <p id="instructions" class="card-text">Instructions: Use your keyboard to try to guess the letters of the word.</p>
+        <h2><span id="trophy"><i class="fas fa-trophy"></i></span> <span id="wins"></span></h2>
+        <h2>Guesses Left: <span id="guesses"></span></h2>
+        <div class="card mb-3 shadow rounded border border-dark">
             <div class="photo-set">
-                <img id="photo-one" style="width:250px; height:250px; object-fit: cover;"
-                    src="https://cdn.shopify.com/s/files/1/0672/8671/products/10-oz-drinking-cup--003_00712_navy-blue_500x.progressive.jpg?v=1538408804" />
-                <img id="photo-two" style="width:250px; height:250px; object-fit: cover;"
-                    src="https://www.biggerbolderbaking.com/wp-content/uploads/2017/08/1C5A0056.jpg" />
+                <img id="photo-one"
+                    src="" />
+                <img id="photo-two" src="" />
             </div>
-
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">
-                    <h2>Correct Letters</h2>
-                    <div id="correct">
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <h2>Incorrect Letters:</h2>
-                    <div id="incorrect">
-
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <h2>Number of Guesses: <span id="guesses"></span></h2>
-                </li>
-            </ul>
-            <button type="button" class="btn btn-primary" id="play-button">Press To Play</button>
-
-
-
-
+            <div id="correct"></div>
         </div>
+        <h2>Wrong Letters:</h2>
+        <div id="incorrect"></div>
     </div>
-
-
     <script src="assets/javascript/game.js"></script>
 </body>
 

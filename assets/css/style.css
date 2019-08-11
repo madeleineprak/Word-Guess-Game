@@ -1,4 +1,45 @@
-/* .page-content {
-    max-width: 500px;
-    margin: auto;
-  } */
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body{
+    background-image: url('../images/stripes-light.png') !important;
+}
+
+h1 {
+    font-family: 'Abril Fatface', cursive !important;
+    font-size: 50px !important;
+}
+
+.instructions {
+    margin: 25px 50px 20px 50px;
+}
+
+.card {
+    margin: 0 auto; 
+    margin-top: 25px;
+}
+
+.photo-set {
+    margin-top: 25px;
+}
+
+#photo-one, #photo-two {
+    width: 250px; 
+    height: 250px; 
+    object-fit: cover;
+    margin: 25px;
+}
+
+#correct, #incorrect {
+    font-size: 50px;
+}
+
+#correct {
+    margin-bottom: 25px;
+}
+
+#trophy {
+    color: gold;
+}

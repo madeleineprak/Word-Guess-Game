@@ -1,5 +1,4 @@
-//DON'T FORGET TO ADD COMMENTS
-
+// Sets the variables.
 var word = "";
 var wordBank = ["eggplant", "honeydew", "milkshake", "pancake", "jellybean"];
 var photoBank = ["assets/images/egg.jpeg", "assets/images/plant.jpeg", "assets/images/honey.jpg", "assets/images/dew.jpg", "assets/images/milk.jpg", "assets/images/shake.jpg", "assets/images/pan.jpg", "assets/images/cake.jpg", "assets/images/jelly.jpg", "assets/images/bean.jpg"]
@@ -12,93 +11,29 @@ var numGuesses = 5;
 var lose = false;
 var win = false;
 var gameStarted = false;
+var numWins = 0;
+var gamesPlayed = 0;
 $("#guesses").html(numGuesses);
-
-//add this to a function
-// function winOrLose() {
-//     if (numGuesses = 0) {
-//         alert("You lose.")
-//     }
-//     if (numGuesses > 0 && ) {
-
-//     }
-// }
-
+$('#wins').html(numWins);
+// Creates the spaces to represent the unguessed letters.
 function createWord() {
-
     for (i = 0; i < wordLength; i++) {
         spaces.push("_");
     }
 }
-
+// Prints the word to the html at the "correct" div.
 function printWord() {
     for (j = 0; j < wordLength; j++) {
         $("#correct").append(spaces[j] + " ");
     }
 }
-
+// Sets the initial game up.
 function setUp() {
-
     createWord();
     printWord();
 }
-
-console.log(word);
-
-// setUp();
-
-//Needed functions
-
-// function playGame () {
-
-// }
-
-// function setUp() {
-
-// }
-// function checkRepeat() {
-
-// }
-
-// function checkIfLetter() {
-
-// }
-
-// function addCorrectLetter() {
-
-// }
-
-// function addIncorrectLetter() {
-
-// }
-
-// function checkWin() {
-
-// }
-
-//function checkLose() {
-
-//}
-
-$("#play-button").on("click", function () {
-    gameStarted = true;
-    lose = false;
-    win = false;
-    spaces = [];
-    guessedLetters = [];
-    numGuesses = 5;
-
-    word = wordBank[Math.floor(Math.random() * wordBank.length)];
-    console.log(word);
-    wordLength = word.length;
-    wordArray = word.split("");
-    $("#correct").html("");
-    $("#incorrect").html("");
-    $("#guesses").html(numGuesses);
-    setUp();
-    // for(i=0; i) {
-
-    // }
+// Changes the photo set to match the word.
+function changePhotos() {
     if (word === wordBank[0]) {
         $("#photo-one").attr("src", photoBank[0]);
         $("#photo-two").attr("src", photoBank[1]);
@@ -115,17 +50,37 @@ $("#play-button").on("click", function () {
         $("#photo-one").attr("src", photoBank[8]);
         $("#photo-two").attr("src", photoBank[9]);
     }
-
-
-});
+}
+// Resets the game for a new one.
+function resetGame() {
+    $("#correct").html("");
+    $("#incorrect").html("");
+    guessedLetters = [];
+    spaces = [];
+    win = false;
+    lose = false;
+    word = wordBank[Math.floor(Math.random() * wordBank.length)];
+    wordLength = word.length;
+    wordArray = word.split("");
+    numGuesses = 5;
+    setUp();
+    changePhotos();
+    console.log(word);
+}
+setUp();
+changePhotos();
+// Each time a user clicks the keyboard.
 document.onkeyup = function (event) {
-
     var letter = event.key.toLowerCase();
     var isWrong = true;
     var repeatLetter = false;
-
-
-    if (!lose && !win && gameStarted) { //not win too?
+    wordLength = word.length;
+    wordArray = word.split("");
+    $("#guesses").html(numGuesses);
+    $('#wins').html(numWins);
+    // Only plays when the user hasn't won/lost yet.
+    if (!lose && !win) {
+        // Checks if the input is a valid letter.
         if (letter.length === 1 && letter.match(/[a-z]/i)) {
             for (i = 0; i < guessedLetters.length; i++) {
                 if (letter === guessedLetters[i]) {
@@ -133,8 +88,8 @@ document.onkeyup = function (event) {
                 }
             }
             if (repeatLetter) {
-                alert("You already guessed that letter! Guess a different letter.")
-            } else {
+                alert("You already guessed that letter! Try a different one.")
+            } else { 
                 guessedLetters.push("" + letter);
                 for (i = 0; i < wordLength; i++) {
                     if (letter === wordArray[i]) {
@@ -144,25 +99,28 @@ document.onkeyup = function (event) {
                         printWord();
                     }
                 }
+                // Checks for win.
                 if (spaces.join("") === word) {
                     win = true;
-                } 
-                if (win) {
+                    numWins++;
+                    $('#wins').html(numWins);
+                    resetGame();
                     alert("You win!");
                 }
+                // Checks if letter is wrong.
                 if (isWrong) {
                     $("#incorrect").append(letter + " ");
                     numGuesses--;
                     $("#guesses").html(numGuesses);
+                    // Checks for loss.
                     if (numGuesses <= 0) {
-                        // $("#guesses").html(numGuesses);
-                        // $("#correct").html("");
-                        // $("#incorrect").html("");
                         alert("You lose. The word was " + word + ".");
                         lose = true;
+                        resetGame();
                     }
                 }
             }
+            // Alerts the user if the input is not a valid letter.
         } else {
             alert("Please enter a valid letter.")
         }

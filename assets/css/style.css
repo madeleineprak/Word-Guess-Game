@@ -4,7 +4,9 @@ html, body {
 }
 
 body{
-    background-image: url('../images/stripes-light.png') !important;
+    background-image: url('../images/red-carpet.jpg') !important;
+    background-size: cover;
+    background-position: center center;  
 }
 
 h1 {
@@ -12,11 +14,16 @@ h1 {
     font-size: 50px !important;
 }
 
+h1, h2, p {
+    color: white !important;
+}
+
 .instructions {
     margin: 25px 50px 20px 50px;
 }
 
 .card {
+    width: 50%; 
     margin: 0 auto; 
     margin-top: 25px;
 }
@@ -26,10 +33,12 @@ h1 {
 }
 
 #photo-one, #photo-two {
-    width: 250px; 
-    height: 250px; 
+    width: 400px; 
+    height: 400px; 
     object-fit: cover;
     margin: 25px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 #correct, #incorrect {
@@ -42,4 +51,22 @@ h1 {
 
 #trophy {
     color: gold;
+}
+
+@media only screen and (max-width:992px) {
+    .card {
+        width: 100%;
+        margin: 0 auto; 
+        margin-top: 25px;
+    }
+
+    #photo-one, #photo-two {
+        width: 250px; 
+        height: 250px; 
+        object-fit: cover;
+        margin: 25px;
+    }
+    #correct, #incorrect {
+        font-size: 25px;
+    }
 }

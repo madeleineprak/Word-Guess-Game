@@ -79,12 +79,9 @@ function resetGame() {
     numGuesses = 5;
     setUp();
     changePhotos();
-    console.log(word);
 }
-
 setUp();
 changePhotos();
-console.log(word);
 // Each time a user clicks the keyboard.
 document.onkeyup = function (event) {
     var letter = event.key.toLowerCase();
@@ -123,8 +120,7 @@ document.onkeyup = function (event) {
                     $("#incorrect").append(letter + " ");
                     numGuesses--;
                     $("#guesses").html(numGuesses);
-                }
-                
+                } 
             }
             // Alerts the user if the input is not a valid letter.
         } else {
@@ -137,7 +133,6 @@ document.onkeyup = function (event) {
             $('#wins').html(numWins);
             alert("You win! Press any key to play the next round.");
         }
-        
         // Checks for loss.
         if (numGuesses <= 0) {
             alert("You lose. The celebrity was " + _.startCase(_.toLower(word)) + ".");
